@@ -1,0 +1,59 @@
+#include <stdio.h>
+#include <string.h>
+#define MAXSTR 1000
+int content, top=-1;
+char stack_string[MAXSTR];
+void pushChar(char content);
+char popChar(void);
+int isEmpty(void);
+int isFull(void);
+int main()
+{
+ int i;
+ char string[MAXSTR];
+ printf("Enter a string :: ");
+ scanf("%[^\n]s",string);
+ 
+ for(i=0;i<strlen(string);i++)
+ pushChar(string[i]);
+ 
+ for(i=0;i<strlen(string);i++)
+ string[i]=popChar();
+ printf("Reversed String is :: %s\n",string);
+ return 0;
+}
+void pushChar(char content)
+{
+ if(isFull())
+ {
+ printf("\nStack is FULL !!!\n");
+ return;
+ }
+ top=top+1;
+ stack_string[top]=content;
+}
+char popChar()
+{
+ if(isEmpty())
+ {
+ printf("\nStack is EMPTY!!!\n");
+ return 0;
+ }
+ content = stack_string[top];
+ top=top-1;
+ return content;
+}
+int isEmpty()
+{
+ if(top==-1)
+ return 1;
+ else
+ return 0;
+}
+int isFull()
+{
+ if(top==MAXSTR-1)
+ return 1;
+ else
+ return 0;
+}
